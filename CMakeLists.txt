@@ -12,7 +12,7 @@ set( PROJECT_SOURCE_DIR ./src)
 set( PROJECT_BINARY_DIR ./include)
 
 # set( MY_OGRE_DIR ~/git/ogre)
-set( MY_OGRE_DIR ~/git/my_ogre)
+set( MY_OGRE_DIR C:/Users/Administrator/Downloads/ogre-sdk-master2-vc15-x64)
 
 # The version number.
 set (OGRE_SAMPLE_APP_VERSION_MAJOR 1)
@@ -31,18 +31,17 @@ configure_file (
 include_directories("${PROJECT_BINARY_DIR}")
 
 ################################################################################
-include_directories ("${MY_OGRE_DIR}/build/include"
-						"${MY_OGRE_DIR}/OgreMain/include"
-						"${MY_OGRE_DIR}/Components/RTShaderSystem/include"
-						"${MY_OGRE_DIR}/Components/Bites/include"
-						"${MY_OGRE_DIR}/Components/Overlay/include"
-						"${MY_OGRE_DIR}/Components/RTShaderSystem/include"
+include_directories ("${MY_OGRE_DIR}/include"
+                        "${MY_OGRE_DIR}/include/OGRE"
+						"${MY_OGRE_DIR}/include/OGRE/RTShaderSystem"
+						"${MY_OGRE_DIR}/include/OGRE/Bites"
+						"${MY_OGRE_DIR}/include/OGRE/Overlay"
 						./include)
 
 ################################################################################
 # add libraries directories
 # link_directories(${CMAKE_SOURCE_DIR}/lib)
-link_directories(${MY_OGRE_DIR}/build/lib)
+link_directories(${MY_OGRE_DIR}/lib)
 
 ################################################################################
 # add libraries

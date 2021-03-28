@@ -6,3 +6,4 @@ OgreSampleApp
 - https://blog.csdn.net/qq_28584889/article/details/97765623
 
 - copy MY_OGRE_DIR/bin to the executable folder
+- makesure media path is currect

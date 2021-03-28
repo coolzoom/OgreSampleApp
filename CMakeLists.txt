@@ -11,6 +11,16 @@ set (CMAKE_CXX_STANDARD 11)
 set( PROJECT_SOURCE_DIR ./src)
 set( PROJECT_BINARY_DIR ./include)
 
+set(OGRE_DIR C:/Users/Administrator/Downloads/ogre-sdk-master2-vc15-x64/CMake)
+
+# specify which version and components you need
+find_package(OGRE 1.12 REQUIRED COMPONENTS Bites RTShaderSystem)
+ 
+# copy resource.cfg next to our binaries where OGRE looks for it
+file(COPY ${OGRE_CONFIG_DIR}/resources.cfg DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+ 
+
+
 # set( MY_OGRE_DIR ~/git/ogre)
 set( MY_OGRE_DIR C:/Users/Administrator/Downloads/ogre-sdk-master2-vc15-x64)
 
@@ -52,6 +62,9 @@ link_directories(${MY_OGRE_DIR}/lib)
 ################################################################################
 # add executable
 add_executable(ogre_sample_app src/main.cpp src/ogre_sample_app.cpp)
+SET(EXECUTABLE_OUTPUT_PATH ${MY_OGRE_DIR}/bin) 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${MY_OGRE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE  ${MY_OGRE_DIR}/bin)
 target_link_libraries (ogre_sample_app OgreMain OgreBites OgreRTShaderSystem)
 
 

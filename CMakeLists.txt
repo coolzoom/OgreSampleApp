@@ -25,18 +25,16 @@ file(COPY ${OGRE_HOME}/media DESTINATION ${CMAKE_SOURCE_DIR})
 # specify which version and components you need
 find_package(OGRE 1.12 REQUIRED COMPONENTS Bites RTShaderSystem)
  
-# copy resource.cfg next to our binaries where OGRE looks for it
-file(COPY ${OGRE_CONFIG_DIR}/resources.cfg DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
- 
+
 # Add configs to the source grouping for Visual Studio
 if(MSVC)
     file(GLOB PROJECT_CONFIGS_WINDOWS_RELEASE src/config/windows/release/*.cfg)
-    file(GLOB PROJECT_CONFIGS_WINDOWS_DEBUG   src/config/windows/debug/*.cfg)
-    file(GLOB PROJECT_CONFIGS_UNIX            src/config/unix/*.cfg)
 
     source_group("Configs\\Windows_Configs\\Release" FILES ${PROJECT_CONFIGS_WINDOWS_RELEASE})
-    source_group("Configs\\Windows_Configs\\Debug"   FILES ${PROJECT_CONFIGS_WINDOWS_DEBUG})
-    source_group("Configs\\Unix_Configs"             FILES ${PROJECT_CONFIGS_UNIX})
+	
+	# copy resource.cfg next to our binaries where OGRE looks for it
+	file(COPY ${PROJECT_CONFIGS_WINDOWS_RELEASE} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+	 
 endif(MSVC)
 
 
@@ -92,11 +90,12 @@ add_executable(ogre_sample_app
 	src/main.cpp 
 	src/ogre_sample_app.cpp
 	${PROJECT_CONFIGS_WINDOWS_RELEASE}
-	${PROJECT_CONFIGS_WINDOWS_DEBUG}
 	)
-SET(EXECUTABLE_OUTPUT_PATH ${OGRE_HOME}/bin) 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${OGRE_HOME}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE  ${OGRE_HOME}/bin)
+	# Output to bin directory
+
+SET(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin) 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE  ${CMAKE_SOURCE_DIR}/bin)
 target_link_libraries (ogre_sample_app OgreMain OgreBites OgreRTShaderSystem)
 
 

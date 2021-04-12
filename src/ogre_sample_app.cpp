@@ -240,7 +240,7 @@ void COgreSampleApp::setup(void)
 	//Ogre::SceneNode* node = scnMgr->getRootSceneNode()->createChildSceneNode();
 	//node->attachObject(ent2);
 
-	setDragLook(true);
+	//setDragLook(true); //true is drag move, otherwise is rotate move.
 
 
 	// register for input events

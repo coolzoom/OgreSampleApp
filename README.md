@@ -11,6 +11,8 @@ OgreSampleApp
 below is not needed unless error occur
 - set system env OGRE_DIR C:\Users\Administrator\Downloads\ogre-sdk-master2-vc15-x64\Cmake
 - change cmakelist MY_OGRE_DIR, run cmake
+- compile in release mode， copy necessary dll from SDK to bin folder
+
 
 # Tips
 - scnMgr->addRenderQueueListener(mOverlaySystem); //to update the gui otherwise tray wont show up https://forums.ogre3d.org/viewtopic.php?t=94386

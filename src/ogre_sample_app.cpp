@@ -119,6 +119,10 @@ void COgreSampleApp::setup(void)
 	// register our scene with the RTSS
 	Ogre::RTShader::ShaderGenerator* shadergen = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
 	shadergen->addSceneManager(scnMgr);
+
+	//skybox
+	scnMgr->setSkyBox(true, "Examples/MorningSkyBox");
+
 	// setup some basic lighting for our scene
 	scnMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
 	Ogre::Light* light = scnMgr->createLight("MainLight");
@@ -142,6 +146,8 @@ void COgreSampleApp::setup(void)
 	mViewport = getRenderWindow()->addViewport(cam);
 	cam->setAspectRatio((Ogre::Real)mViewport->getActualWidth() / (Ogre::Real)mViewport->getActualHeight());
 
+
+	//mViewport->setBackgroundColour(ColourValue(0.8f, 1.0f, 1.0f));
 
 	////
 	//// setup default viewport layout and camera
@@ -240,7 +246,7 @@ void COgreSampleApp::setup(void)
 	//Ogre::SceneNode* node = scnMgr->getRootSceneNode()->createChildSceneNode();
 	//node->attachObject(ent2);
 
-	//setDragLook(true); //true is drag move, otherwise is rotate move.
+	//setDragLook(true); //true is drag move
 
 
 	// register for input events

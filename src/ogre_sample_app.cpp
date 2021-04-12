@@ -8,7 +8,15 @@
 #include "OgreRenderWindow.h"
 #include "OgreEntity.h"
 #include "OgreParticleSystem.h"
-
+//#include "OgreHlmsManager.h"
+//#include "OgreHlmsPbsMaterial.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <vector>
+#include <utility> // std::pair
+#include <stdexcept> // std::runtime_error
+#include <sstream> // std::stringstream
 void COgreSampleApp::setDragLook(bool enabled)
 {
 	if (enabled)
@@ -170,7 +178,59 @@ void COgreSampleApp::setup(void)
 	Entity* ent = scnMgr->createEntity("Head", "ogrehead.mesh");
 	scnMgr->getRootSceneNode()->attachObject(ent);
 
-	
+	std::ifstream       file("C:\\Users\\Administrator\\Desktop\\data.csv");
+	std::vector< std::vector<std::string> >   matrix;
+	std::vector<std::string>   row;
+	std::string                line;
+	std::string                cell;
+
+	while (file)
+	{
+		std::getline(file, line);
+		std::stringstream lineStream(line);
+		row.clear();
+
+		while (std::getline(lineStream, cell, ','))
+			row.push_back(cell);
+
+		if (!row.empty())
+			matrix.push_back(row);
+	}
+
+	for (int i = 0; i<int(matrix.size()); i++)
+	{
+		for (int j = 0; j<int(matrix[i].size()); j++)
+		{
+			std::cout << matrix[i][j] << " ";
+
+		}
+		if (i > 0)
+		{
+			float x = std::stof(matrix[i][0]);
+			float y = std::stof(matrix[i][1]);
+			float z = std::stof(matrix[i][2]) * 10;
+			// do your stuff 
+			Entity* e = scnMgr->createEntity("ogrehead.mesh");
+			SceneNode* sceneNode = scnMgr->getRootSceneNode()->createChildSceneNode();
+			sceneNode->setPosition(Vector3(x, y, z));
+			sceneNode->attachObject(e);
+
+			/*PbsMaterial* pbsMaterial = new PbsMaterial();
+			pbsMaterial->setAlbedo(ColourValue::Green);
+
+			pbsMaterial->setRoughness(0.012);
+			pbsMaterial->setLightRoughnessOffset(0.2);
+
+			float f0 = z;
+			pbsMaterial->setF0(Ogre::ColourValue(f0, f0, f0));
+			pbsMaterial->setEnvironmentMap(cubeMap);
+
+			createHLMSMaterial(ent, pbsMaterial, "PBS_" + Ogre::StringConverter::toString(x) + "_" + Ogre::StringConverter::toString(z));*/
+			std::cout << x << " " << y << " " << z;
+		}
+
+		std::cout << std::endl;
+	}
 
 	//// finally something to render
 	//Ogre::Entity* ent2 = scnMgr->createEntity("Sinbad.mesh");

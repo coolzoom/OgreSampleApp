@@ -122,7 +122,8 @@ void COgreSampleApp::setup(void)
 
 	// also need to tell where we are
 	mCameraNode = scnMgr->getRootSceneNode()->createChildSceneNode();
-	mCameraNode->setPosition(0, 0, 15);
+	//mCameraNode->setPosition(0, 0, 15);
+	mCameraNode->setFixedYawAxis(true);
 	mCameraNode->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 	// create the camera
 	Ogre::Camera* cam = scnMgr->createCamera("myCam");
@@ -131,7 +132,7 @@ void COgreSampleApp::setup(void)
 	mCameraNode->attachObject(cam);
 	// and tell it to render into the main window
 	mViewport = getRenderWindow()->addViewport(cam);
-
+	cam->setAspectRatio((Ogre::Real)mViewport->getActualWidth() / (Ogre::Real)mViewport->getActualHeight());
 
 
 	////
@@ -139,11 +140,12 @@ void COgreSampleApp::setup(void)
 	//mCameraNode = scnMgr->getRootSceneNode()->createChildSceneNode();
 	//mCameraNode->setFixedYawAxis(true);
 	//mCamera = scnMgr->createCamera("MainCamera");
+	//mViewport = getRenderWindow()->addViewport(mCamera);
 	//mCamera->setAspectRatio((Ogre::Real)mViewport->getActualWidth() / (Ogre::Real)mViewport->getActualHeight());
 	//mCamera->setAutoAspectRatio(true);
 	//mCamera->setNearClipDistance(5);
 	//mCameraNode->attachObject(mCamera);
-	//mViewport = getRenderWindow()->addViewport(mCamera);
+	//
 
 	mCameraMan = new CameraMan(mCameraNode);   // create a default camera controller
 	mCameraMan->setStyle(CS_ORBIT);
@@ -161,7 +163,7 @@ void COgreSampleApp::setup(void)
 	//mTrayMgr->createCheckBox(TL_TOPLEFT, "Rain", "Rain", 130)->setChecked(false);
 	mTrayMgr->showAll();
 	//mTrayMgr->showCursor();
-	mControls = new AdvancedRenderControls(mTrayMgr, mCamera);
+	mControls = new AdvancedRenderControls(mTrayMgr, cam);
 	// create an ogre head entity and place it at the origin
 	Entity* ent = scnMgr->createEntity("Head", "ogrehead.mesh");
 	scnMgr->getRootSceneNode()->attachObject(ent);

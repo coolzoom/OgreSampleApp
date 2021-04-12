@@ -49,7 +49,7 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
 
 			mTrayMgr = 0;
 			mCameraMan = 0;
-			mCamera = 0;
+			//mCamera = 0;
 			mCameraNode = 0;
 			mViewport = 0;
 			mControls = 0;
@@ -190,7 +190,7 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
 		Ogre::SceneManager* scnMgr = nullptr;
 
 		Ogre::Viewport* mViewport = nullptr;          // main viewport
-		Ogre::Camera* mCamera = nullptr;              // main camera
+		//Ogre::Camera* mCamera = nullptr;              // main camera
 		Ogre::SceneNode* mCameraNode = nullptr;       // camera node
 		//Ogre::RenderWindow* mWindow = nullptr;      // context render window
 		TrayManager* mTrayMgr = nullptr;           // tray interface manager

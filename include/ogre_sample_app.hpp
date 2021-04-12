@@ -62,10 +62,10 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
 		//virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 		virtual void setupParticles();
 
-		virtual void frameRendered(const Ogre::FrameEvent& evt)
-		{
-			//std::cout << "frameRendered " << std::endl;
-		}
+		//virtual void frameRendered(const Ogre::FrameEvent& evt)
+		//{
+		//	std::cout << "frameRendered " << std::endl;
+		//}
         /*-----------------------------------------------------------------------------
       | Extends frameRenderingQueued to update tray manager and carousel.
       -----------------------------------------------------------------------------*/

@@ -174,17 +174,20 @@ void COgreSampleApp::setup(void)
 	setDragLook(true);
 
 
-	//// register for input events
-	//addInputListener(this);
-	OgreBites::Event evt;
+	// register for input events
+	addInputListener(this);
 
-	evt.type = OgreBites::KEYDOWN;
-	evt.key.keysym.sym = OgreBites::SDLK_ESCAPE; //BUTTON_LEFT;
-	evt.key.keysym.mod = 0;
-	evt.key.repeat = 1;
-	evt.key.type = OgreBites::KEYDOWN;
+	//OgreBites::Event evt;
 
-	this->_fireInputEvent(evt, 0);
+	//evt.type = OgreBites::KEYDOWN;
+	//evt.key.keysym.sym = OgreBites::SDLK_ESCAPE; //BUTTON_LEFT;
+	//evt.key.keysym.mod = 0;
+	//evt.key.repeat = 1;
+	//evt.key.type = OgreBites::KEYDOWN;
+
+	//this->_fireInputEvent(evt, 0);
+	//ApplicationContext::setup();
+	//setWindowGrab();
 
 }
 

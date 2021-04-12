@@ -29,10 +29,10 @@ find_package(OGRE 1.12 REQUIRED COMPONENTS Bites RTShaderSystem)
 # Add configs to the source grouping for Visual Studio
 if(MSVC)
     file(GLOB PROJECT_CONFIGS_WINDOWS_RELEASE src/config/windows/release/*.cfg)
-    file(GLOB PROJECT_HEADER include/*.h)
-	
+
     source_group("Configs\\Windows_Configs\\Release" FILES ${PROJECT_CONFIGS_WINDOWS_RELEASE})
-	source_group("include"  FILES ${PROJECT_HEADER})
+	
+	# copy resource.cfg next to our binaries where OGRE looks for it
 	file(COPY ${PROJECT_CONFIGS_WINDOWS_RELEASE} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 	 
 endif(MSVC)
@@ -87,8 +87,8 @@ link_directories(${OGRE_HOME}/lib)
 ################################################################################
 # add executable
 add_executable(ogre_sample_app 
-	src/SampleBrowser.cpp
-	${PROJECT_HEADER}
+	src/main.cpp 
+	src/ogre_sample_app.cpp
 	${PROJECT_CONFIGS_WINDOWS_RELEASE}
 	)
 	# Output to bin directory

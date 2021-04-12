@@ -210,11 +210,14 @@ void COgreSampleApp::setup(void)
 			float y = std::stof(matrix[i][1]);
 			float z = std::stof(matrix[i][2]) * 10;
 			// do your stuff 
-			Entity* e = scnMgr->createEntity("ogrehead.mesh");
+			//Entity* e = scnMgr->createEntity("ogrehead.mesh");
+			//https://forums.ogre3d.org/viewtopic.php?p=301318&sid=ce193664e1d3d7c4af509e6f4e2718c6
+			Entity* e = scnMgr->createEntity(Ogre::SceneManager::PrefabType::PT_SPHERE);
 			SceneNode* sceneNode = scnMgr->getRootSceneNode()->createChildSceneNode();
 			sceneNode->setPosition(Vector3(x, y, z));
+			sceneNode->setScale(Vector3(0.1f, 0.1f, 0.1f));
 			sceneNode->attachObject(e);
-
+			
 			/*PbsMaterial* pbsMaterial = new PbsMaterial();
 			pbsMaterial->setAlbedo(ColourValue::Green);
 

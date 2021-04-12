@@ -15,3 +15,4 @@ below is not needed unless error occur
 # Tips
 - scnMgr->addRenderQueueListener(mOverlaySystem); //to update the gui otherwise tray wont show up https://forums.ogre3d.org/viewtopic.php?t=94386
 - setWindowGrab(); // is to grab the windows mouser when mouser hover on the OGRE game window
+- scnMgr->createEntity(Ogre::SceneManager::PrefabType::PT_SPHERE);

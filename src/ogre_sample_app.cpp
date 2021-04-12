@@ -184,7 +184,7 @@ void COgreSampleApp::setup(void)
 	Entity* ent = scnMgr->createEntity("Head", "ogrehead.mesh");
 	scnMgr->getRootSceneNode()->attachObject(ent);
 
-	std::ifstream       file("C:\\Users\\Administrator\\Desktop\\data.csv");
+	std::ifstream       file("C:\\Users\\Administrator\\Desktop\\data2.csv");
 	std::vector< std::vector<std::string> >   matrix;
 	std::vector<std::string>   row;
 	std::string                line;
@@ -207,14 +207,14 @@ void COgreSampleApp::setup(void)
 	{
 		for (int j = 0; j<int(matrix[i].size()); j++)
 		{
-			std::cout << matrix[i][j] << " ";
+			//std::cout << matrix[i][j] << " ";
 
 		}
 		if (i > 0)
 		{
-			float x = std::stof(matrix[i][0]);
-			float y = std::stof(matrix[i][1]);
-			float z = std::stof(matrix[i][2]) * 10;
+			float x = std::stof(matrix[i][0]) * 10;
+			float y = std::stof(matrix[i][1]) * 10;
+			float z = std::stof(matrix[i][2]) * 1000;
 			// do your stuff 
 			//Entity* e = scnMgr->createEntity("ogrehead.mesh");
 			//https://forums.ogre3d.org/viewtopic.php?p=301318&sid=ce193664e1d3d7c4af509e6f4e2718c6
@@ -235,7 +235,7 @@ void COgreSampleApp::setup(void)
 			pbsMaterial->setEnvironmentMap(cubeMap);
 
 			createHLMSMaterial(ent, pbsMaterial, "PBS_" + Ogre::StringConverter::toString(x) + "_" + Ogre::StringConverter::toString(z));*/
-			std::cout << x << " " << y << " " << z;
+			//std::cout << x << " " << y << " " << z;
 		}
 
 		std::cout << std::endl;

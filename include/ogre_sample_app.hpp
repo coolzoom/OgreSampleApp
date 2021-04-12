@@ -66,18 +66,18 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
 		//{
 		//	std::cout << "frameRendered " << std::endl;
 		//}
+
         /*-----------------------------------------------------------------------------
       | Extends frameRenderingQueued to update tray manager and carousel.
       -----------------------------------------------------------------------------*/
         bool frameRenderingQueued(const Ogre::FrameEvent& evt)
         {
-
+            std::cout << "frameRenderingQueued " << std::endl;
 			mTrayMgr->frameRendered(evt);
 			mControls->frameRendered(evt);
-			if (!mTrayMgr->isDialogVisible())
-			{
-				mCameraMan->frameRendered(evt);   // if dialog isn't up, then update the camera
-			}
+
+			mCameraMan->frameRendered(evt);   // if dialog isn't up, then update the camera
+
 
             try
             {
@@ -90,7 +90,100 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
 
             return true;
         }
+        /*-----------------------------------------------------------------------------
+   | Extends pointerPressed to inject mouse press into tray manager, and to check
+   | for thumbnail clicks, just because we can.
+   -----------------------------------------------------------------------------*/
+        virtual bool mousePressed(const MouseButtonEvent& evt)
+        {
+            mTrayMgr->mousePressed(evt);
+            mControls->mousePressed(evt);
+            mCameraMan->mousePressed(evt);
+            std::cout << "mousePressed " << std::endl;
+            return true;
+        }
 
+        // convert and redirect
+        virtual bool touchPressed(const TouchFingerEvent& evt) {
+            MouseButtonEvent e;
+            e.button = BUTTON_LEFT;
+            std::cout << "touchPressed " << std::endl;
+            return mousePressed(e);
+        }
+
+        /*-----------------------------------------------------------------------------
+          | Extends pointerReleased to inject mouse release into tray manager.
+          -----------------------------------------------------------------------------*/
+        virtual bool mouseReleased(const MouseButtonEvent& evt)
+        {
+            std::cout << "mouseReleased " << std::endl;
+            mTrayMgr->mouseReleased(evt);
+            mCameraMan->mouseReleased(evt);
+            mControls->mousePressed(evt);
+            return true;
+        }
+
+        virtual bool keyPressed(const KeyboardEvent& evt)
+        {
+            mTrayMgr->keyPressed(evt);
+            mCameraMan->keyPressed(evt);
+            mControls->keyPressed(evt);
+            std::cout << "keyPressed " << std::endl;
+            return true;
+        }
+
+        virtual bool keyReleased(const KeyboardEvent& evt)
+        {
+            mTrayMgr->keyReleased(evt);
+            mCameraMan->keyReleased(evt);
+            mControls->keyReleased(evt);
+            std::cout << "keyReleased " << std::endl;
+            return true;
+        }
+
+        // convert and redirect
+        virtual bool touchReleased(const TouchFingerEvent& evt) {
+            MouseButtonEvent e;
+            e.button = BUTTON_LEFT;
+            std::cout << "touchReleased " << std::endl;
+            return mouseReleased(e);
+        }
+
+        /*-----------------------------------------------------------------------------
+          | Extends pointerMoved to inject mouse position into tray manager, and checks
+          | for mouse wheel movements to slide the carousel, because we can.
+          -----------------------------------------------------------------------------*/
+        virtual bool mouseMoved(const MouseMotionEvent& evt)
+        {
+            mTrayMgr->mouseMoved(evt);
+            mCameraMan->mouseMoved(evt);
+            mControls->mouseMoved(evt);
+            std::cout << "mouseMoved " << std::endl;
+            return true;
+        }
+
+        // convert and redirect
+        virtual bool touchMoved(const TouchFingerEvent& evt) {
+            MouseMotionEvent e;
+            e.x = evt.x * getRenderWindow()->getWidth();
+            e.y = evt.y * getRenderWindow()->getHeight();
+            e.xrel = evt.dx * getRenderWindow()->getWidth();
+            e.yrel = evt.dy * getRenderWindow()->getHeight();
+            std::cout << "touchMoved " << std::endl;
+            return mouseMoved(e);
+        }
+
+        //TODO: Handle iOS and Android.
+        /** Mouse wheel scrolls the sample list.
+         */
+        virtual bool mouseWheelRolled(const MouseWheelEvent& evt)
+        {
+            mTrayMgr->mouseWheelRolled(evt);
+            mCameraMan->mouseWheelRolled(evt);
+            mControls->mouseWheelRolled(evt);
+            std::cout << "mouseWheelRolled " << std::endl;
+            return true;
+        }
 		virtual void setup();
 
 	private:

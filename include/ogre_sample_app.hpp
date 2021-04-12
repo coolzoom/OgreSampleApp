@@ -21,7 +21,7 @@
 #include "OgreComponents.h"
 #include "OgreCameraMan.h"
 #include "OgreInput.h"
-
+#include "OgreAdvancedRenderControls.h"
 #include <OgreConfigFile.h>
 #include <OgreWindowEventUtilities.h>
 
@@ -44,19 +44,52 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
 	public:
 
 		COgreSampleApp():
-			OgreBites::ApplicationContext("OgreSampleApp"){}
+			OgreBites::ApplicationContext("OgreSampleApp"){
+			// so we don't have to worry about checking if these keys exist later
 
-		virtual void setupView();
+			mTrayMgr = 0;
+			mCameraMan = 0;
+			mCamera = 0;
+			mCameraNode = 0;
+			mViewport = 0;
+			mControls = 0;
+			mCursorWasVisible = false;
+			mDragLook = false;
+		}
+
 		virtual void setDragLook(bool enabled);
 		virtual void checkBoxToggled(CheckBox* box);
-		virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+		//virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 		virtual void setupParticles();
-		virtual void setupTogglers();
-		virtual void setupContent();
+
 		virtual void frameRendered(const Ogre::FrameEvent& evt)
 		{
-			std::cout << "frameRendered " << std::endl;
+			//std::cout << "frameRendered " << std::endl;
 		}
+        /*-----------------------------------------------------------------------------
+      | Extends frameRenderingQueued to update tray manager and carousel.
+      -----------------------------------------------------------------------------*/
+        bool frameRenderingQueued(const Ogre::FrameEvent& evt)
+        {
+
+			mTrayMgr->frameRendered(evt);
+			mControls->frameRendered(evt);
+			if (!mTrayMgr->isDialogVisible())
+			{
+				mCameraMan->frameRendered(evt);   // if dialog isn't up, then update the camera
+			}
+
+            try
+            {
+                return ApplicationContext::frameRenderingQueued(evt);
+            }
+            catch (Ogre::Exception& e)   // show error and fall back to menu
+            {
+                mTrayMgr->showOkDialog("Error!", e.getDescription() + "\nSource: " + e.getSource());
+            }
+
+            return true;
+        }
 
 		virtual void setup();
 
@@ -66,11 +99,12 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
 		Ogre::Viewport* mViewport = nullptr;          // main viewport
 		Ogre::Camera* mCamera = nullptr;              // main camera
 		Ogre::SceneNode* mCameraNode = nullptr;       // camera node
-		Ogre::RenderWindow* mWindow = nullptr;      // context render window
+		//Ogre::RenderWindow* mWindow = nullptr;      // context render window
 		TrayManager* mTrayMgr = nullptr;           // tray interface manager
 		CameraMan* mCameraMan = nullptr;           // basic camera controller
 		bool mCursorWasVisible = false;             // was cursor visible before dialog appeared
 		bool mDragLook = false;                     // click and drag to free-look
+		AdvancedRenderControls* mControls;
 		SceneNode* mFountainPivot = nullptr;
 };
 

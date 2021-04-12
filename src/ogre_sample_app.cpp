@@ -151,16 +151,18 @@ void COgreSampleApp::setup(void)
 	mCameraMan->setStyle(CS_ORBIT);
 	mCameraMan->setYawPitchDist(Degree(0), Degree(15), 250);
 
+	setupParticles();   // setup particles
+
 	mTrayMgr = new TrayManager("SampleControls", getRenderWindow(), this);  // create a tray interface
 	mTrayMgr->showCursor();
 	//// create check boxes to toggle the visibility of our particle systems
 	mTrayMgr->createLabel(TL_TOPLEFT, "VisLabel", "Particles");
-	//mTrayMgr->createCheckBox(TL_TOPLEFT, "Fireworks", "Fireworks", 130)->setChecked(true);
-	//mTrayMgr->createCheckBox(TL_TOPLEFT, "Fountain1", "Fountain A", 130)->setChecked(true);
-	//mTrayMgr->createCheckBox(TL_TOPLEFT, "Fountain2", "Fountain B", 130)->setChecked(true);
-	//mTrayMgr->createCheckBox(TL_TOPLEFT, "Aureola", "Aureola", 130)->setChecked(false);
-	//mTrayMgr->createCheckBox(TL_TOPLEFT, "Nimbus", "Nimbus", 130)->setChecked(false);
-	//mTrayMgr->createCheckBox(TL_TOPLEFT, "Rain", "Rain", 130)->setChecked(false);
+	mTrayMgr->createCheckBox(TL_TOPLEFT, "Fireworks", "Fireworks", 130)->setChecked(true);
+	mTrayMgr->createCheckBox(TL_TOPLEFT, "Fountain1", "Fountain A", 130)->setChecked(true);
+	mTrayMgr->createCheckBox(TL_TOPLEFT, "Fountain2", "Fountain B", 130)->setChecked(true);
+	mTrayMgr->createCheckBox(TL_TOPLEFT, "Aureola", "Aureola", 130)->setChecked(false);
+	mTrayMgr->createCheckBox(TL_TOPLEFT, "Nimbus", "Nimbus", 130)->setChecked(false);
+	mTrayMgr->createCheckBox(TL_TOPLEFT, "Rain", "Rain", 130)->setChecked(false);
 	mTrayMgr->showAll();
 	//mTrayMgr->showCursor();
 	mControls = new AdvancedRenderControls(mTrayMgr, cam);
@@ -168,7 +170,7 @@ void COgreSampleApp::setup(void)
 	Entity* ent = scnMgr->createEntity("Head", "ogrehead.mesh");
 	scnMgr->getRootSceneNode()->attachObject(ent);
 
-	setupParticles();   // setup particles
+	
 
 	//// finally something to render
 	//Ogre::Entity* ent2 = scnMgr->createEntity("Sinbad.mesh");

@@ -118,6 +118,8 @@ void COgreSampleApp::setup(void)
 	lightNode->setPosition(0, 10, 15);
 	lightNode->attachObject(light);
 
+	scnMgr->addRenderQueueListener(mOverlaySystem);
+
 	// also need to tell where we are
 	mCameraNode = scnMgr->getRootSceneNode()->createChildSceneNode();
 	mCameraNode->setPosition(0, 0, 15);

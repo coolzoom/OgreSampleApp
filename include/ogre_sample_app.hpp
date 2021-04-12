@@ -98,6 +98,12 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
         {
             mTrayMgr->mousePressed(evt);
             mControls->mousePressed(evt);
+            
+            if (mDragLook && evt.button == BUTTON_LEFT)
+            {
+                mCameraMan->setStyle(CS_FREELOOK);
+                mTrayMgr->hideCursor();
+            }
             mCameraMan->mousePressed(evt);
             std::cout << "mousePressed " << std::endl;
             return true;
@@ -118,6 +124,11 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
         {
             std::cout << "mouseReleased " << std::endl;
             mTrayMgr->mouseReleased(evt);
+            if (mDragLook && evt.button == BUTTON_LEFT)
+            {
+                mCameraMan->setStyle(CS_MANUAL);
+                mTrayMgr->showCursor();
+            }
             mCameraMan->mouseReleased(evt);
             mControls->mousePressed(evt);
             return true;

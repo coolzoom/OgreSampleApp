@@ -132,7 +132,7 @@ void COgreSampleApp::setup(void)
 	mCameraNode = scnMgr->getRootSceneNode()->createChildSceneNode();
 	//mCameraNode->setPosition(0, 0, 15);
 	mCameraNode->setFixedYawAxis(true);
-	mCameraNode->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
+	//mCameraNode->lookAt(Ogre::Vector3(0, 0, -1), Ogre::Node::TS_PARENT);
 	// create the camera
 	Ogre::Camera* cam = scnMgr->createCamera("myCam");
 	cam->setNearClipDistance(5); // specific to this sample

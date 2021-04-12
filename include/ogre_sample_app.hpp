@@ -81,7 +81,7 @@ class COgreSampleApp : public OgreBites::ApplicationContext,
 
             try
             {
-                return ApplicationContext::frameRenderingQueued(evt);
+                return OgreBites::ApplicationContext::frameRenderingQueued(evt);
             }
             catch (Ogre::Exception& e)   // show error and fall back to menu
             {
